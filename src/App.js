@@ -1,5 +1,11 @@
+import LiveList from "./components/LiveList"
+
 const App = () => {
-  return <div className="App">hello world</div>
+  return (
+    <div className="App">
+      <LiveList />
+    </div>
+  )
 }
 
 export default App
