@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import DisplayGame from './DisplayGame'
 
-const LiveList = () => {
+const LiveList = ({ setProfile }) => {
   const [games, setGames] = useState([])
 
   useEffect(() => {
     const socet = new WebSocket('ws://bad-api-assignment.reaktor.com/rps/live')
     socet.onmessage = message => {
       const data = JSON.parse(JSON.parse(message.data))
-      console.log(games);
       if (data.type === 'GAME_BEGIN') {
         setNewGame(data)
       } else if (data.type === 'GAME_RESULT') {
@@ -39,16 +38,18 @@ const LiveList = () => {
         playerA: data.playerA,
         playerB: data.playerB,
         t: data.t,
-        type: data.type,
+        type: data.type
       }
-      setGames(games.map(g => (g.playersId === newGame.playersId ? newGame : g)))
+      setGames(
+        games.map(g => (g.playersId === newGame.playersId ? newGame : g))
+      )
     }
   }
 
   return (
     <div>
       {games.map(game => {
-        return DisplayGame(game)
+        return DisplayGame(game, setProfile)
       })}
     </div>
   )

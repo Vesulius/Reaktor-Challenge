@@ -1,5 +1,4 @@
 const History = (games, name) => {
-  console.log(games)
 
   const playerGames = games
     .filter(game => {
