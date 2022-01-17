@@ -12,7 +12,16 @@ const getPage = async page => {
     return response.data
 }
 
+const getAll = async (page, games) => {
+  const response = await axios.get(`${baseUrl}${page}`)
+  if (!response.cursor) {
+    return games
+  }
+  return getAll(response.cursor, games.concat(response.data))
+}
+
 export default {
   getFirstPage,
-  getPage
+  getPage,
+  getAll
 }

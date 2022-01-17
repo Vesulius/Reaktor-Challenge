@@ -1,5 +1,7 @@
 const History = (games, name) => {
-
+  if (!games) {
+    return <div>NO PROFILE SELECTED</div>
+  }
   const playerGames = games
     .filter(game => {
       return game.playerA.name === name || game.playerB.name === name
