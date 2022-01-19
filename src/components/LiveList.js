@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import DisplayGame from './DisplayGame'
+import { addGame, addResult } from '../reducers/liveGamesReducer'
 
 const LiveList = ({ setProfile }) => {
-  const [games, setGames] = useState([])
+  const games = useSelector(state => state.liveGames)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const socet = new WebSocket('ws://bad-api-assignment.reaktor.com/rps/live')
@@ -20,30 +23,15 @@ const LiveList = ({ setProfile }) => {
   })
 
   const setNewGame = data => {
-    const newGames = games.length > 100 ? games.slice(-100) : games
     const newGame = {
       ...data,
       playersId: `${data.playerA.name}${data.playerB.name}`
     }
-    setGames([...newGames, newGame])
+    dispatch(addGame(newGame))
   }
 
   const setGameResult = data => {
-    const game = games.find(
-      game => game.playersId === `${data.playerA.name}${data.playerB.name}`
-    )
-    if (game) {
-      const newGame = {
-        ...game,
-        playerA: data.playerA,
-        playerB: data.playerB,
-        t: data.t,
-        type: data.type
-      }
-      setGames(
-        games.map(g => (g.playersId === newGame.playersId ? newGame : g))
-      )
-    }
+    dispatch(addResult(data, `${data.playerA.name}${data.playerB.name}`))
   }
 
   return (

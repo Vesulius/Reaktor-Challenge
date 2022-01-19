@@ -1,16 +1,16 @@
 const playedGamesReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_GAMES':
-      return [...state, action.data]
+      return action.data
+    default:
+      return state
   }
 }
 
 export const addGames = games => {
-  return async dispatch => {
-    dispatch({
-      type: 'ADD_GAMES',
-      data: games
-    })
+  return {
+    type: 'ADD_GAMES',
+    data: games
   }
 }
 

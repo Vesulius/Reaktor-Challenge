@@ -1,7 +1,8 @@
-const History = (games, name) => {
+const Profile = (games, name) => {
   if (!games) {
     return <div>NO PROFILE SELECTED</div>
   }
+  
   const playerGames = games
     .filter(game => {
       return game.playerA.name === name || game.playerB.name === name
@@ -74,4 +75,4 @@ const playerOutcome = (game, name) => {
   return result === name ? 'WIN' : 'LOSS'
 }
 
-export default History
+export default Profile

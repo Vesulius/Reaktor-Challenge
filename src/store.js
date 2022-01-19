@@ -1,15 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import thunk from 'redux-thunk'
 
+import liveGamesReducer from './reducers/liveGamesReducer'
 import playedGamesReducer from './reducers/playedGamesReducer'
 
-const reducer = playedGamesReducer
+const reducer = combineReducers({
+  playedGames: playedGamesReducer,
+  liveGames: liveGamesReducer
+})
 const Store = () => createStore(
     reducer,
-    composeWithDevTools(
-      applyMiddleware(thunk)
-    )
+    composeWithDevTools()
 )
 
 export default Store
