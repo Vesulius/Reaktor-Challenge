@@ -8,7 +8,7 @@ import { addGames } from './reducers/playedGamesReducer'
 
 const App = () => {
   const [profile, setProfile] = useState(null)
-  const playedGames = useSelector(state => state.playedGames)
+  
   const dispatch = useDispatch()
 
   useEffect(async () => {
@@ -26,7 +26,7 @@ const App = () => {
   return (
     <div className="App">
       <LiveList setProfile={setProfile} />
-      {Profile(playedGames, profile)}
+      {Profile(profile)}
     </div>
   )
 }

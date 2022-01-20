@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import DisplayGame from './DisplayGame'
 import { addGame, addResult } from '../reducers/liveGamesReducer'
 
-const LiveList = ({ setProfile }) => {
+const LiveList = () => {
   const games = useSelector(state => state.liveGames)
   const dispatch = useDispatch()
 
@@ -37,7 +37,7 @@ const LiveList = ({ setProfile }) => {
   return (
     <div>
       {games.map(game => {
-        return DisplayGame(game, setProfile)
+        return DisplayGame(game, dispatch)
       })}
     </div>
   )

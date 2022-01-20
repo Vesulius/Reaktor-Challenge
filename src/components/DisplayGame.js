@@ -1,8 +1,10 @@
-const DisplayGame = (game, setProfile) => {
+import { setProfileVal } from "../reducers/profileReducer"
+
+const DisplayGame = (game, dispatch) => {
 
   const handleClick = name =>  event => {
     event.preventDefault()
-    setProfile(name)
+    dispatch(setProfileVal(name))
   }
 
   return (

@@ -1,8 +1,13 @@
-const Profile = (games, name) => {
+import { useSelector } from 'react-redux'
+
+const Profile = () => {
+  const name = useSelector(state => state.profile)
+  const games = useSelector(state => state.playedGames)
+
   if (!games) {
     return <div>NO PROFILE SELECTED</div>
   }
-  
+
   const playerGames = games
     .filter(game => {
       return game.playerA.name === name || game.playerB.name === name
