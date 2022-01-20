@@ -1,14 +1,13 @@
-import { setProfileVal } from "../reducers/profileReducer"
+import { setProfileVal } from '../reducers/profileReducer'
+import { getWinner } from '../utility'
 
 const DisplayGame = (game, dispatch) => {
-
-  const handleClick = name =>  event => {
+  const handleClick = name => event => {
     event.preventDefault()
     dispatch(setProfileVal(name))
   }
-
   return (
-    <div>
+    <div key={game.gameId}>
       <h4>
         <a href="" onClick={handleClick(game.playerA.name)}>
           {game.playerA.name}
@@ -23,17 +22,11 @@ const DisplayGame = (game, dispatch) => {
   )
 }
 
-// the order of this list matters for getResult function
-const results = ['ROCK', 'PAPER', 'SCISSORS']
-
 const getResult = game => {
   if (game.type !== 'GAME_RESULT') return 'Playing...'
-  const resultA = results.indexOf(game.playerA.played)
-  const resultB = results.indexOf(game.playerB.played)
-  if (resultA === resultB) return 'DRAW'
-  if (resultA + 1 === resultB || !(resultA - 1 === resultB))
-    return `Winner ${game.playerB.name}`
-  return `Winner ${game.playerA.name}`
+  const winner = getWinner(game)
+  if (!winner) { return 'DRAW' }
+  return `Winner – ${winner.name}`
 }
 
 export default DisplayGame

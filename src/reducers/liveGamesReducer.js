@@ -1,26 +1,14 @@
+import { compareGames } from '../utility'
+
 const liveGamesReducer = (state = [], action) => {
+  console.log(action);
   switch (action.type) {
-    case 'ADD_GAME':
-      return state.concat(action.game)
-    case 'ADD_RESULT':
-      return state.map(game => game.playersId === action.playersId ? action.result : game)
+    case 'GAME_BEGIN':
+      return state.concat(action)
+    case 'GAME_RESULT':
+      return state.map(game => compareGames(game, action) ? action : game)
     default:
       return state
-  }
-}
-
-export const addGame = game => {
-  return {
-    type: 'ADD_GAME',
-    game
-  }
-}
-
-export const addResult = (result, playersId) => {
-  return {
-    type: 'ADD_RESULT',
-    result,
-    playersId
   }
 }
 

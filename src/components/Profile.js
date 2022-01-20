@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux'
 
+import { getWinner } from '../utility'
+
 const Profile = () => {
   const name = useSelector(state => state.profile)
   const games = useSelector(state => state.playedGames)
@@ -61,23 +63,10 @@ const Profile = () => {
   )
 }
 
-// the order of this list matters for getResult function
-const results = ['ROCK', 'PAPER', 'SCISSORS']
-
-const getResult = game => {
-  if (game.type !== 'GAME_RESULT') return 'Playing...'
-  const resultA = results.indexOf(game.playerA.played)
-  const resultB = results.indexOf(game.playerB.played)
-  if (resultA === resultB) return 'DRAW'
-  if (resultA + 1 === resultB || !(resultA - 1 === resultB))
-    return `${game.playerB.name}`
-  return `${game.playerA.name}`
-}
-
 const playerOutcome = (game, name) => {
-  const result = getResult(game)
-  if (result === 'DRAW') return 'DRAW'
-  return result === name ? 'WIN' : 'LOSS'
+  const result = getWinner(game)
+  if (!result) {return 'DRAW'}
+  return result.name === name ? 'WIN' : 'LOSS'
 }
 
 export default Profile
