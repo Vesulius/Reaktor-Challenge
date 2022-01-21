@@ -18,7 +18,6 @@ const style = {
 
 const Profile = player => {
   const games = useSelector(state => state.playedGames)
-  // const name = useSelector(state => state.profile)
   if (!player) return <div></div>
   const name = player.player.name
 
@@ -70,12 +69,6 @@ const Profile = player => {
 
   return (
     <div>
-      {/* <h4>PLAYER: {name}</h4>
-      <p>MATCHES: {playerGames.length}</p>
-      <p>WINRATE: {winrate}</p>
-      <p>ROCK: {playRates.rocks}</p>
-      <p>PAPER: {playRates.papers}</p>
-      <p>SCISSORS: {playRates.scissors}</p> */}
       <List sx={style} component="nav" aria-label="mailbox folders">
       <ListItem
           secondaryAction={<ListItemText primary={playerGames.length} />}

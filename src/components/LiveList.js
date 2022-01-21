@@ -1,4 +1,6 @@
 import { Grid } from '@material-ui/core'
+import Skeleton from '@mui/material/Skeleton'
+import Stack from '@mui/material/Stack'
 
 import React, { useEffect } from 'react'
 
@@ -19,6 +21,27 @@ const LiveList = () => {
       socet.close()
     }
   })
+
+  if (games.length === 0) {
+    return (
+      <div style={{ marginTop: 30, padding: 30 }}>
+        <Grid container spacing={2} justifyContent="space-evenly">
+          <Grid item xs={6}>
+            <Skeleton variant="rectangular" width={200} height={118} />
+          </Grid>
+          <Grid item xs={4}>
+            <Skeleton variant="rectangular" width={200} height={118} />
+          </Grid>
+          <Grid item xs={6}>
+            <Skeleton variant="rectangular" width={200} height={118} />
+          </Grid>
+          <Grid item xs={4}>
+            <Skeleton variant="rectangular" width={200} height={118} />
+          </Grid>
+        </Grid>
+      </div>
+    )
+  }
 
   return (
     <div style={{ marginTop: 20, padding: 30 }}>
