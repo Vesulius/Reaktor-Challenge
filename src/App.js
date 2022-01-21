@@ -1,5 +1,7 @@
+import Container from '@material-ui/core/Container'
+
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import Profile from './components/Profile'
 import historyService from './services/history'
@@ -8,7 +10,7 @@ import { addGames } from './reducers/playedGamesReducer'
 
 const App = () => {
   const [profile, setProfile] = useState(null)
-  
+
   const dispatch = useDispatch()
 
   useEffect(async () => {
@@ -22,17 +24,18 @@ const App = () => {
     dispatch(addGames(Array.from(new Set(games))))
   }, [])
 
-  
   return (
-    <div className="App">
-      <LiveList setProfile={setProfile} />
-      {Profile(profile)}
-    </div>
+    <Container>
+      <div className="App">
+        <LiveList setProfile={setProfile} />
+        {Profile(profile)}
+      </div>
+    </Container>
   )
 }
 
 const noDuplicates = arr => {
-  return  Array.from(new Set(arr)).length === arr.length
+  return Array.from(new Set(arr)).length === arr.length
 }
 
 export default App

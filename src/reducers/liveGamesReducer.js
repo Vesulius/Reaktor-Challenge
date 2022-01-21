@@ -1,7 +1,6 @@
 import { compareGames } from '../utility'
 
 const liveGamesReducer = (state = [], action) => {
-  console.log(action);
   switch (action.type) {
     case 'GAME_BEGIN':
       return state.concat(action)
