@@ -1,10 +1,26 @@
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import Divider from '@mui/material/Divider'
+import ContentCutIcon from '@mui/icons-material/ContentCut'
+import LandscapeIcon from '@mui/icons-material/Landscape'
+import FeedIcon from '@mui/icons-material/Feed'
+
 import { useSelector } from 'react-redux'
 
 import { getWinner } from '../utility'
 
-const Profile = () => {
-  const name = useSelector(state => state.profile)
+const style = {
+  width: '100%',
+  maxWidth: 360,
+  bgcolor: 'background.paper'
+}
+
+const Profile = player => {
   const games = useSelector(state => state.playedGames)
+  // const name = useSelector(state => state.profile)
+  if (!player) return <div></div>
+  const name = player.player.name
 
   if (!games) {
     return <div>NO PROFILE SELECTED</div>
@@ -28,10 +44,11 @@ const Profile = () => {
     return <div>NO DATA</div>
   }
 
-  const winrate =
+  const winrate = (
     playerGames.reduce((total, game) => {
       return game.result === 'WIN' ? total + 1 : total
     }, 0) / playerGames.length
+  ).toFixed(2)
 
   const playRates = playerGames.reduce(
     (total, game) => {
@@ -53,19 +70,52 @@ const Profile = () => {
 
   return (
     <div>
-      <h4>PLAYER: {name}</h4>
+      {/* <h4>PLAYER: {name}</h4>
       <p>MATCHES: {playerGames.length}</p>
       <p>WINRATE: {winrate}</p>
       <p>ROCK: {playRates.rocks}</p>
       <p>PAPER: {playRates.papers}</p>
-      <p>SCISSORS: {playRates.scissors}</p>
+      <p>SCISSORS: {playRates.scissors}</p> */}
+      <List sx={style} component="nav" aria-label="mailbox folders">
+      <ListItem
+          secondaryAction={<ListItemText primary={playerGames.length} />}
+        >
+          <ListItemText primary={"MATCHES"} />
+        </ListItem>
+        <Divider light />
+        <ListItem
+          secondaryAction={<ListItemText primary={`${winrate} %`} />}
+        >
+          <ListItemText primary={"WINRATE"} />
+        </ListItem>
+        <Divider light />
+        <ListItem
+          secondaryAction={<ListItemText primary={playRates.rocks} />}
+        >
+          <LandscapeIcon fontSize="small" />
+        </ListItem>
+        <Divider light />
+        <ListItem
+          secondaryAction={<ListItemText primary={playRates.papers} />}
+        >
+          <FeedIcon fontSize="small" />
+        </ListItem>
+        <Divider light />
+        <ListItem
+          secondaryAction={<ListItemText primary={playRates.scissors} />}
+        >
+          <ContentCutIcon fontSize="small" />
+        </ListItem>
+      </List>
     </div>
   )
 }
 
 const playerOutcome = (game, name) => {
   const result = getWinner(game)
-  if (!result) {return 'DRAW'}
+  if (!result) {
+    return 'DRAW'
+  }
   return result.name === name ? 'WIN' : 'LOSS'
 }
 

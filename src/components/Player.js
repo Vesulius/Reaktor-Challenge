@@ -35,7 +35,7 @@ const Player = ({ player }) => {
           {profile ? 'close profile' : 'show profile'}
         </Button>
       </CardActions>
-      {profile ? <Profile /> : null}
+      {profile ? <Profile player={player} /> : null}
     </Card>
   )
 }
