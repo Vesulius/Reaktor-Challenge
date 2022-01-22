@@ -1,5 +1,4 @@
 import {
-  Grid,
   Button,
   Card,
   CardActions,
@@ -18,7 +17,7 @@ import Profile from './Profile'
 
 const Player = ({ player }) => {
   const [profile, setProfile] = useState(false)
-  console.log(player)
+
   return (
     <Card sx={{ minWidth: 275 }} variant="outlined">
       <CardContent>

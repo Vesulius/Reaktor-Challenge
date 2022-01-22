@@ -10,6 +10,7 @@ export const getWinner = game => {
   return game.playerA
 }
 
+// returns true if given games have same players, order dosent matter
 export const compareGames = (game1, game2) => {
   return (
     (game1.playerA.name === game2.playerA.name &&
