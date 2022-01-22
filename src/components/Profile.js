@@ -8,7 +8,7 @@ import FeedIcon from '@mui/icons-material/Feed'
 
 import { useSelector } from 'react-redux'
 
-import { getWinner } from '../utility'
+import { playerOutcome } from '../utility'
 
 const style = {
   width: '100%',
@@ -102,14 +102,6 @@ const Profile = player => {
       </List>
     </div>
   )
-}
-
-const playerOutcome = (game, name) => {
-  const result = getWinner(game)
-  if (!result) {
-    return 'DRAW'
-  }
-  return result.name === name ? 'WIN' : 'LOSS'
 }
 
 export default Profile

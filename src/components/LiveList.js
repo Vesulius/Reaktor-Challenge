@@ -42,7 +42,6 @@ const LiveList = () => {
       </div>
     )
   }
-  console.log(games);
 
   return (
     <div style={{ marginTop: 20, padding: 30 }}>
