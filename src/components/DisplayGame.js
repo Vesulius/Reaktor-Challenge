@@ -5,10 +5,14 @@ import { Grid, Card, Typography } from '@material-ui/core'
 import Avatar from '@mui/material/Avatar'
 
 const DisplayGame = game => {
-  const winner = player => getWinner(game) === player
-
-  const playerA = { ...game.playerA, winner: winner(game.playerA) }
-  const playerB = { ...game.playerB, winner: winner(game.playerB) }
+  const outcome = player => {
+    const winner = getWinner(game)
+    if (!winner) return 'DRAW'
+    return winner === player ? 'WIN' : 'LOSS'
+  }
+  
+  const playerA = { ...game.playerA, outcome: outcome(game.playerA) }
+  const playerB = { ...game.playerB, outcome: outcome(game.playerB) }
 
   return (
     <Grid item key={game.gameId}>

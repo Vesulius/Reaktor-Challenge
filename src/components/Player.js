@@ -44,26 +44,25 @@ const Player = ({ player }) => {
 }
 
 const Outcome = ({ player }) => {
-  const text = player.winner ? outcomeText('WIN') : outcomeText('LOSS')
   switch (player.played) {
     case 'ROCK':
       return (
         <>
-          {text}
+          {player.outcome}
           <LandscapeIcon fontSize="large" />
         </>
       )
     case 'PAPER':
       return (
         <>
-          {text}
+          {player.outcome}
           <FeedIcon fontSize="large" />
         </>
       )
     case 'SCISSORS':
       return (
         <>
-          {text}
+          {player.outcome}
           <ContentCutIcon fontSize="large" />
         </>
       )
