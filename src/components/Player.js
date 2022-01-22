@@ -48,35 +48,35 @@ const Outcome = ({ player }) => {
     case 'ROCK':
       return (
         <>
-          {player.outcome}
+          {OutcomeText(player.outcome)}
           <LandscapeIcon fontSize="large" />
         </>
       )
     case 'PAPER':
       return (
         <>
-          {player.outcome}
+          {OutcomeText(player.outcome)}
           <FeedIcon fontSize="large" />
         </>
       )
     case 'SCISSORS':
       return (
         <>
-          {player.outcome}
+          {OutcomeText(player.outcome)}
           <ContentCutIcon fontSize="large" />
         </>
       )
     default:
       return (
         <>
-          {outcomeText('PLAYING')}
+          {OutcomeText('PLAYING')}
           <CircularProgress color="inherit" />
         </>
       )
   }
 }
 
-const outcomeText = text => {
+const OutcomeText = text => {
   return (
     <Typography variant="h4" gutterBottom component="div">
       {text}
