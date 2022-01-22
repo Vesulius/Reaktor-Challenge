@@ -17,21 +17,25 @@ import { useState } from 'react'
 import Profile from './Profile'
 
 const Player = ({ player }) => {
-    const [profile, setProfile] = useState(false)
-
+  const [profile, setProfile] = useState(false)
+  console.log(player)
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275 }} variant="outlined">
       <CardContent>
         <Typography variant="caption">Player:</Typography>
         <Typography variant="h5" component="h2">
           {player.name}
         </Typography>
-        {player.played 
-            ? (<PlayedHand hand={player.played} />) 
-            : (<WaitingResults />)}
+        <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
+          <Outcome player={player} />
+        </Stack>
       </CardContent>
       <CardActions>
-        <Button size="small" variant="outlined" onClick={() => setProfile(!profile)}>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => setProfile(!profile)}
+        >
           {profile ? 'close profile' : 'show profile'}
         </Button>
       </CardActions>
@@ -40,30 +44,45 @@ const Player = ({ player }) => {
   )
 }
 
-
-const PlayedHand = hand => {
-  switch (hand.hand) {
+const Outcome = ({ player }) => {
+  const text = player.winner ? outcomeText('WIN') : outcomeText('LOSS')
+  switch (player.played) {
     case 'ROCK':
-      return <LandscapeIcon fontSize="large" />
+      return (
+        <>
+          {text}
+          <LandscapeIcon fontSize="large" />
+        </>
+      )
     case 'PAPER':
-      return <FeedIcon fontSize="large" />
+      return (
+        <>
+          {text}
+          <FeedIcon fontSize="large" />
+        </>
+      )
     case 'SCISSORS':
-      return <ContentCutIcon fontSize="large" />
+      return (
+        <>
+          {text}
+          <ContentCutIcon fontSize="large" />
+        </>
+      )
     default:
-      return <div>playing...</div>
+      return (
+        <>
+          {outcomeText('PLAYING')}
+          <CircularProgress color="inherit" />
+        </>
+      )
   }
 }
 
-const WaitingResults = () => {
+const outcomeText = text => {
   return (
-    <div>
-      <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
-        <Typography variant="h4" gutterBottom component="div">
-          PLAYING
-        </Typography>
-        <CircularProgress color="inherit" />
-      </Stack>
-    </div>
+    <Typography variant="h4" gutterBottom component="div">
+      {text}
+    </Typography>
   )
 }
 
