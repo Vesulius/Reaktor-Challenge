@@ -6,16 +6,12 @@ import {
   Typography
 } from '@material-ui/core'
 import Stack from '@mui/material/Stack'
-import ContentCutIcon from '@mui/icons-material/ContentCut'
-import LandscapeIcon from '@mui/icons-material/Landscape'
-import FeedIcon from '@mui/icons-material/Feed'
-import CircularProgress from '@mui/material/CircularProgress'
 
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-
 import Profile from './PlayerStats'
 import { setProfile } from '../reducers/profileReducer'
+import RPSIcon from './RPSIcon'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
@@ -53,36 +49,12 @@ const Player = ({ player }) => {
 }
 
 const Outcome = ({ player }) => {
-  switch (player.played) {
-    case 'ROCK':
-      return (
-        <>
-          {OutcomeText(player.outcome)}
-          <LandscapeIcon fontSize="large" />
-        </>
-      )
-    case 'PAPER':
-      return (
-        <>
-          {OutcomeText(player.outcome)}
-          <FeedIcon fontSize="large" />
-        </>
-      )
-    case 'SCISSORS':
-      return (
-        <>
-          {OutcomeText(player.outcome)}
-          <ContentCutIcon fontSize="large" />
-        </>
-      )
-    default:
-      return (
-        <>
-          {OutcomeText('PLAYING')}
-          <CircularProgress color="inherit" />
-        </>
-      )
-  }
+  return (
+    <>
+      {OutcomeText(player.outcome)}
+      <RPSIcon player={player}/>
+    </>
+  )
 }
 
 const OutcomeText = text => {

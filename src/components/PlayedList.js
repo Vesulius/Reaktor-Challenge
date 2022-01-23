@@ -1,25 +1,17 @@
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
-import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
-import * as React from 'react'
-import ContentCutIcon from '@mui/icons-material/ContentCut'
-import LandscapeIcon from '@mui/icons-material/Landscape'
-import FeedIcon from '@mui/icons-material/Feed'
-import { Card, CardActions, CardContent, Typography } from '@material-ui/core'
+import { Card, CardContent, Typography } from '@material-ui/core'
 
-import LiveList from './LiveList'
+import * as React from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
-import DisplayGame from './DisplayGame'
 import { playerOutcome } from '../utility'
 import PlayerStats from './PlayerStats'
 import { closeProfile } from '../reducers/profileReducer'
+import RPSIcon from './RPSIcon'
 
 const style = {
   width: '100%',
@@ -57,7 +49,7 @@ const PlayedList = () => {
     >
       <List sx={style} component="nav" aria-label="mailbox folders">
         {games.map(game => {
-          return <SimpleGame game={game} />
+          return <SimpleGame game={game} key={game.gameId} />
         })}
       </List>
     </Box>
@@ -69,8 +61,8 @@ const PlayedList = () => {
     const otherPlayer =
       game.playerB.name === playerName ? game.playerA : game.playerB
     return (
-      <>
-        <ListItem key={game.gameId}>
+      <div>
+        <ListItem key={game.t}>
           <Typography variant="h5">
             {playerOutcome({ game, player })}
           </Typography>
@@ -84,18 +76,14 @@ const PlayedList = () => {
           <Typography variant="h5">{otherPlayer.name}</Typography>
         </ListItem>
         <Divider />
-      </>
+      </div>
     )
   }
 
   return (
     <div>
       <React.Fragment>
-        <Drawer
-          anchor={'right'}
-          open={!!playerName}
-          onClose={toggleDrawer()}
-        >
+        <Drawer anchor={'right'} open={!!playerName} onClose={toggleDrawer()}>
           <div>
             <Card variant="outlined">
               <CardContent>
@@ -113,31 +101,6 @@ const PlayedList = () => {
       </React.Fragment>
     </div>
   )
-}
-
-const RPSIcon = ({ player }) => {
-  switch (player.played) {
-    case 'ROCK':
-      return (
-        <>
-          <LandscapeIcon fontSize="large" />
-        </>
-      )
-    case 'PAPER':
-      return (
-        <>
-          <FeedIcon fontSize="large" />
-        </>
-      )
-    case 'SCISSORS':
-      return (
-        <>
-          <ContentCutIcon fontSize="large" />
-        </>
-      )
-    default:
-      return <></>
-  }
 }
 
 export default PlayedList
