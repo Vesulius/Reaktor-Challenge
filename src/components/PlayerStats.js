@@ -50,6 +50,8 @@ const Profile = ({ player }) => {
           return { ...total, papers: total.papers + 1 }
         case 'SCISSORS':
           return { ...total, scissors: total.scissors + 1 }
+        default:
+          return total
       }
     },
     {

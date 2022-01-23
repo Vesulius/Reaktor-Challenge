@@ -34,8 +34,10 @@ const LiveList = () => {
   return (
     <div style={{ marginTop: 20, padding: 30 }}>
       <Grid container spacing={5} justifyContent="center">
-        {games.sort((game1, game2) => game2.time - game1.time).map(game => {
-          return DisplayGame(game, dispatch)
+        {games
+          .sort((game1, game2) => game2.time - game1.time)
+          .map(game => {
+            return DisplayGame(game, dispatch)
         })}
       </Grid>
     </div>
