@@ -2,13 +2,13 @@
 
 This is an assignment for the [Reaktor Challenge 2022](https://www.reaktor.com/assignment-2022-developers/).
 
-#### Implementation
+## Implementation
 
-The project is written in javascript and uses nmp package manager. The major libraries used were react and material ui.
+The project is written in javascript and uses npm package manager. The major libraries used were react and material ui.
 
-The played games requests are sent through server proxy enabling cors for the responses. The code for this server and instuctions [here](https://github.com/Rob--W/cors-anywhere/) https://github.com/Rob--W/cors-anywhere/
+The played games requests are sent through server proxy allowing cors policy for the responses. The code for this server and instuctions at https://github.com/Rob--W/cors-anywhere/
 
-#### Manual
+## Manual
 
 Clone project
 
@@ -31,7 +31,7 @@ Open browser
 ```$ YOUR_BROWSER http://localhost:3000/ ``` 
 
 
-#### Demo
+## Demo
 
 Deployed demo [here](https://powerful-reaches-66022.herokuapp.com/).
 
