@@ -12,12 +12,14 @@ import FeedIcon from '@mui/icons-material/Feed'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-import Profile from './Profile'
+import Profile from './PlayerStats'
+import { setProfile } from '../reducers/profileReducer'
 
 const Player = ({ player }) => {
-  const [profile, setProfile] = useState(false)
-
+  const dispatch = useDispatch()
+  const [stats, setStats] = useState(false)
   return (
     <Card sx={{ minWidth: 275 }} variant="outlined">
       <CardContent>
@@ -33,12 +35,19 @@ const Player = ({ player }) => {
         <Button
           size="small"
           variant="outlined"
-          onClick={() => setProfile(!profile)}
+          onClick={() => setStats(!stats)}
         >
-          {profile ? 'close profile' : 'show profile'}
+          {stats ? 'close stats' : 'stats'}
+        </Button>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => dispatch(setProfile(player.name))}
+        >
+          profile
         </Button>
       </CardActions>
-      {profile ? <Profile player={player} /> : null}
+      {stats && <Profile player={player} />}
     </Card>
   )
 }

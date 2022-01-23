@@ -3,16 +3,14 @@ import Container from '@material-ui/core/Container'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import Profile from './components/Profile'
+import Profile from './components/PlayerStats'
 import historyService from './services/history'
 import LiveList from './components/LiveList'
 import { addGames } from './reducers/playedGamesReducer'
 import RPSBar from './components/RPSBar'
-
+import PlayedList from './components/PlayedList'
 
 const App = () => {
-  const [profile, setProfile] = useState(null)
-
   const dispatch = useDispatch()
 
   useEffect(async () => {
@@ -29,8 +27,8 @@ const App = () => {
   return (
     <Container>
       <RPSBar />
-      <LiveList setProfile={setProfile} />
-      {Profile(profile)}
+      <LiveList />
+      <PlayedList />
     </Container>
   )
 }

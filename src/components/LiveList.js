@@ -10,7 +10,6 @@ const LiveList = () => {
   const games = useSelector(state => state.liveGames)
   const dispatch = useDispatch()
   
-
   useEffect(() => {
     const socet = new WebSocket('ws://bad-api-assignment.reaktor.com/rps/live')
     socet.onmessage = message => {

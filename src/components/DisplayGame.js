@@ -1,9 +1,7 @@
-import { getWinner } from '../utility'
-import Player from './Player'
-
 import { Grid, Card, Typography } from '@material-ui/core'
 import Avatar from '@mui/material/Avatar'
 
+import Player from './Player'
 import { playerOutcome } from '../utility'
 
 const DisplayGame = game => {
@@ -19,7 +17,7 @@ const DisplayGame = game => {
   return (
     <Grid item key={game.gameId}>
       <Card
-        sx={{ minWidth: 400 }}
+        sx={{ minWidth: 300 }}
         style={{ marginTop: 30, padding: 30 }}
         variant="outlined"
       >

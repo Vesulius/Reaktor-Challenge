@@ -16,26 +16,18 @@ const style = {
   bgcolor: 'background.paper'
 }
 
-const Profile = player => {
+const Profile = ({ player }) => {
   const games = useSelector(state => state.playedGames)
-  if (!player) return <div></div>
-  const name = player.player.name
-
-  if (!games) {
-    return <div>NO PROFILE SELECTED</div>
-  }
 
   const playerGames = games
     .filter(game => {
-      return game.playerA.name === name || game.playerB.name === name
+      return game.playerA.name === player.name || game.playerB.name === player.name
     })
     .map(game => {
       return {
         played:
-          game.playerA.name === name
-            ? game.playerA.played
-            : game.playerB.played,
-        result: playerOutcome(game, name)
+          game.playerA === player ? game.playerA.played : game.playerB.played,
+        result: playerOutcome({ game, player })
       }
     })
 
@@ -70,27 +62,21 @@ const Profile = player => {
   return (
     <div>
       <List sx={style} component="nav" aria-label="mailbox folders">
-      <ListItem
+        <ListItem
           secondaryAction={<ListItemText primary={playerGames.length} />}
         >
-          <ListItemText primary={"MATCHES"} />
+          <ListItemText primary={'MATCHES'} />
         </ListItem>
         <Divider light />
-        <ListItem
-          secondaryAction={<ListItemText primary={`${winrate} %`} />}
-        >
-          <ListItemText primary={"WINRATE"} />
+        <ListItem secondaryAction={<ListItemText primary={`${winrate} %`} />}>
+          <ListItemText primary={'WINRATE'} />
         </ListItem>
         <Divider light />
-        <ListItem
-          secondaryAction={<ListItemText primary={playRates.rocks} />}
-        >
+        <ListItem secondaryAction={<ListItemText primary={playRates.rocks} />}>
           <LandscapeIcon fontSize="small" />
         </ListItem>
         <Divider light />
-        <ListItem
-          secondaryAction={<ListItemText primary={playRates.papers} />}
-        >
+        <ListItem secondaryAction={<ListItemText primary={playRates.papers} />}>
           <FeedIcon fontSize="small" />
         </ListItem>
         <Divider light />
