@@ -1,25 +1,14 @@
 import { Grid } from '@material-ui/core'
 import Skeleton from '@mui/material/Skeleton'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import DisplayGame from './DisplayGame'
 
 const LiveList = () => {
-  const games = useSelector(state => state.liveGames)
   const dispatch = useDispatch()
-  
-  useEffect(() => {
-    const socet = new WebSocket('ws://bad-api-assignment.reaktor.com/rps/live')
-    socet.onmessage = message => {
-      const data = JSON.parse(JSON.parse(message.data))
-      dispatch(data)
-    }
-    return () => {
-      socet.close()
-    }
-  })
+  const games = useSelector(state => state.liveGames)
 
   if (games.length === 0) {
     return (

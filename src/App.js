@@ -1,28 +1,16 @@
 import Container from '@material-ui/core/Container'
 
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 
-import Profile from './components/PlayerStats'
-import historyService from './services/history'
 import LiveList from './components/LiveList'
-import { addGames } from './reducers/playedGamesReducer'
 import RPSBar from './components/RPSBar'
 import PlayedList from './components/PlayedList'
+import usePlayedGames from './hooks.js/usePlayedGames'
+import useLiveGames from './hooks.js/useLiveGames'
 
 const App = () => {
-  const dispatch = useDispatch()
-
-  useEffect(async () => {
-    let cursor = '/rps/history'
-    let games = []
-    do {
-      const response = await historyService.getPage(cursor)
-      games = games.concat(response.data)
-      cursor = response.cursor
-    } while (noDuplicates(games.map(g => g.t)))
-    dispatch(addGames(Array.from(new Set(games))))
-  }, [])
+  usePlayedGames()
+  useLiveGames()
 
   return (
     <Container>
@@ -31,10 +19,6 @@ const App = () => {
       <PlayedList />
     </Container>
   )
-}
-
-const noDuplicates = arr => {
-  return Array.from(new Set(arr)).length === arr.length
 }
 
 export default App
