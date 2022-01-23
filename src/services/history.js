@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'https://bad-api-assignment.reaktor.com'
+const baseUrl = 'https://afternoon-meadow-18887.herokuapp.com/https://bad-api-assignment.reaktor.com'
 
 const getFirstPage = async () => {
   const response = await axios.get(`${baseUrl}/rps/history`)

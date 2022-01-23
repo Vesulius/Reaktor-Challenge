@@ -5,7 +5,7 @@ const useLiveGames = () => {
     const dispatch = useDispatch()
   
     useEffect(() => {
-      const socet = new WebSocket('ws://bad-api-assignment.reaktor.com/rps/live')
+      const socet = new WebSocket('https://afternoon-meadow-18887.herokuapp.com/ws://bad-api-assignment.reaktor.com/rps/live')
       socet.onmessage = message => {
         const data = JSON.parse(JSON.parse(message.data))
         dispatch(data)
